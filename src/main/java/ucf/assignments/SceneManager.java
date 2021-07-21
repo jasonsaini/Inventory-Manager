@@ -16,7 +16,7 @@ import java.io.IOException;
 
 public class SceneManager {
     public Scene mainWindow, editNameWindow, editSerialNumberWindow, editValueWindow,SNFormatDialogWindow, nameFormatErrorDialogWindow,
-    valueFormatErrorDialogWindow;
+    valueFormatErrorDialogWindow, existingSNWindow;
 
     public void load(){
 
@@ -27,12 +27,16 @@ public class SceneManager {
         Parent nameFormatDialogRoot = null;
         Parent SNFormatDialogRoot = null;
         Parent valueFormatDialogRoot = null;
+        Parent existingSNRoot = null;
         try {
             mainRoot = FXMLLoader.load(getClass().getResource("inventoryManager.fxml"));
             SNFormatDialogRoot = FXMLLoader.load(getClass().getResource("invalidSNFormat.fxml"));
             nameFormatDialogRoot = FXMLLoader.load(getClass().getResource("invalidNameFormat.fxml"));
             valueFormatDialogRoot = FXMLLoader.load(getClass().getResource("invalidValueFormat.fxml"));
             editNameRoot = FXMLLoader.load(getClass().getResource("editName.fxml"));
+            editValueRoot = FXMLLoader.load(getClass().getResource("editValue.fxml"));
+            editSNRoot = FXMLLoader.load(getClass().getResource("editSerialNumber.fxml"));
+            existingSNRoot = FXMLLoader.load(getClass().getResource("ExistingSNPopup.fxml"));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -41,6 +45,9 @@ public class SceneManager {
         nameFormatErrorDialogWindow = new Scene(nameFormatDialogRoot);
         valueFormatErrorDialogWindow = new Scene(valueFormatDialogRoot);
         editNameWindow = new Scene(editNameRoot);
+        editValueWindow = new Scene(editValueRoot);
+        editSerialNumberWindow = new Scene(editSNRoot);
+        existingSNWindow = new Scene(existingSNRoot);
 
     }
 
@@ -50,7 +57,7 @@ public class SceneManager {
         {
             case "Main Window":
                 return mainWindow;
-            case "Edit Serial Number Dialog":
+            case "Edit SN Dialog":
                 return editSerialNumberWindow;
             case "Edit Value Dialog":
                 return editValueWindow;
@@ -62,6 +69,9 @@ public class SceneManager {
                 return valueFormatErrorDialogWindow;
             case "Edit Name Dialog":
                 return editNameWindow;
+            case "Existing SN":
+                return existingSNWindow;
+
         }
         return null;
     }

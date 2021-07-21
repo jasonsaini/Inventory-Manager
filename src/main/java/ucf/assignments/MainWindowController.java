@@ -123,12 +123,12 @@ public class MainWindowController {
                 sceneManager.setupDialogStage("SN Format Error Dialog", "Invalid Format!", false);
                 return;
             }
-            else if(itemDataList.size() > 1 && serialNumberAlreadyExists(serialString)) {
-                // SERIAL NUMBER ALREADY EXISTS ALERT
+            else if(itemDataList.size() > 0 && serialNumberAlreadyExists(serialString)) {
+                sceneManager.setupDialogStage("Existing SN", "Duplicate Serial Number!", false);
+                return;
             }
             else {
                 newItem.setSerialNum(serialString);
-
             }
         // set cell value factories
         nameColumn.setCellValueFactory(new PropertyValueFactory<InventoryItem,String>("name"));
@@ -197,21 +197,31 @@ public class MainWindowController {
     private void editValue()
     {
         // store index of selected item
+        int selectedIndex = inventoryTable.getSelectionModel().getSelectedIndex();
+        // store item to edit
+        InventoryItem toSend = itemDataList.get(selectedIndex);
         // open popup window
-        // collect new value from text field
-        // set new value in observable list
+        sceneManager.setupDialogStageWithSingleItem("Edit Value Dialog", "Edit", false, toSend);
+        // clear selected index
+        inventoryTable.getSelectionModel().clearSelection();
         // update tableview
-        // close popup
+        inventoryTable.setItems(itemDataList);
+        inventoryTable.refresh();
     }
 
     private void editSerialNumber()
     {
         // store index of selected item
+        int selectedIndex = inventoryTable.getSelectionModel().getSelectedIndex();
+        // store item to edit
+        InventoryItem toSend = itemDataList.get(selectedIndex);
         // open popup window
-        // collect new Serial number from text field
-        // set new serial number in observable list
+        sceneManager.setupDialogStageWithSingleItem("Edit SN Dialog", "Edit", false, toSend);
+        // clear selected index
+        inventoryTable.getSelectionModel().clearSelection();
         // update tableview
-        // close popup
+        inventoryTable.setItems(itemDataList);
+        inventoryTable.refresh();
     }
 
 

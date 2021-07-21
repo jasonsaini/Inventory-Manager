@@ -12,7 +12,8 @@ import javafx.stage.Stage;
 public class SNFormatDialogController {
     @FXML
     GridPane outerGridPane;
-    public void clearSerialNumberField(ActionEvent actionEvent) {
+
+    public void SNFormatOKButtonClicked(ActionEvent actionEvent) {
         Stage curStage = (Stage)outerGridPane.getScene().getWindow();
         curStage.close();
     }
