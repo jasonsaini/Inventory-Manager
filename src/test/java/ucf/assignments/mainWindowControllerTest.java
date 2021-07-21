@@ -1,3 +1,7 @@
+/*
+ *  UCF COP3330 Summer 2021 Assignment 5 Solution
+ *  Copyright 2021 Jason Saini
+ */
 package ucf.assignments;
 
 import org.junit.jupiter.api.Test;
@@ -11,6 +15,7 @@ class mainWindowControllerTest {
     {
         // open gui and save a file with at least one item
         // collect array from file
+
         // if array size >= 1
             // assert that add item works
         // assert expected (true) against actual (array size >= 1)
