@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+
+
+<AnchorPane prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ucf.assignments.mainWindowController">
+   <children>
+      <GridPane prefHeight="600.0" prefWidth="900.0">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="900.0" minWidth="10.0" prefWidth="900.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="154.0" minWidth="0.0" prefWidth="0.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints maxHeight="96.0" minHeight="0.0" prefHeight="11.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="205.0" minHeight="10.0" prefHeight="127.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="446.0" minHeight="10.0" prefHeight="446.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <TableView prefHeight="400.0" prefWidth="590.0" GridPane.rowIndex="2">
+              <columns>
+                  <TableColumn editable="false" prefWidth="288.0" resizable="false" sortable="false" text="Serial Number" />
+                <TableColumn minWidth="0.0" prefWidth="288.0" text="Name" />
+                <TableColumn minWidth="8.0" prefWidth="316.0" text="Value ($)" />
+              </columns>
+            </TableView>
+            <GridPane GridPane.rowIndex="1">
+              <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <TextField prefHeight="52.0" prefWidth="189.0" promptText="Enter 12-Digit Serial Number">
+                     <GridPane.margin>
+                        <Insets left="50.0" />
+                     </GridPane.margin>
+                  </TextField>
+                  <TextField minHeight="-Infinity" minWidth="-Infinity" prefHeight="52.0" prefWidth="189.0" promptText="Enter Item Name" GridPane.columnIndex="1">
+                     <GridPane.margin>
+                        <Insets left="50.0" />
+                     </GridPane.margin>
+                  </TextField>
+                  <Button alignment="CENTER" mnemonicParsing="false" onAction="#addItemButtonClicked" prefHeight="52.0" prefWidth="150.0" text="Add Item to Inventory" textFill="#0004ff" GridPane.columnIndex="3">
+                     <GridPane.margin>
+                        <Insets left="60.0" />
+                     </GridPane.margin>
+                  </Button>
+                  <TextField minHeight="-Infinity" minWidth="-Infinity" prefHeight="52.0" prefWidth="189.0" promptText="Enter Dollar Value...." GridPane.columnIndex="2">
+                     <GridPane.margin>
+                        <Insets left="50.0" />
+                     </GridPane.margin>
+                  </TextField>
+               </children>
+            </GridPane>
+            <MenuBar prefHeight="65.0" prefWidth="900.0">
+              <menus>
+                <Menu mnemonicParsing="false" text="File">
+                     <items>
+                        <Menu mnemonicParsing="false" text="Save...">
+                          <items>
+                            <MenuItem mnemonicParsing="false" onAction="#saveAsTSVButtonClicked" text="TSV" />
+                              <MenuItem mnemonicParsing="false" onAction="#saveAsHTMLButtonClicked" text="HTML" />
+                              <MenuItem mnemonicParsing="false" onAction="#saveAsJSONButtonClicked" text="JSON" />
+                          </items>
+                        </Menu>
+                        <MenuItem mnemonicParsing="false" onAction="#loadButtonClicked" text="Load..." />
+                     </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Sort">
+                  <items>
+                        <MenuItem mnemonicParsing="false" onAction="#sortByNameButtonClicked" text="By Name" />
+                    <MenuItem mnemonicParsing="false" onAction="#sortByValueClicked" text="By Value" />
+                        <MenuItem mnemonicParsing="false" onAction="#sortBySerialNumClicked" text="By Serial Number" />
+                  </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Search">
+                  <items>
+                        <MenuItem mnemonicParsing="false" onAction="#searchByNameClicked" text="By Name" />
+                    <MenuItem mnemonicParsing="false" onAction="#searchBySerialNumClicked" text="By Serial Number" />
+                  </items>
+                </Menu>
+              </menus>
+            </MenuBar>
+         </children>
+      </GridPane>
+   </children>
+</AnchorPane>

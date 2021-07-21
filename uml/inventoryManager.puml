@@ -1,0 +1,58 @@
+@startuml
+class InventoryManager
+{
+    start()
+    main()
+}
+
+class mainWindowController
+{
+    + addItemButtonClicked()
+    + loaddButtonClicked()
+    + saveAsTSVButtonClicked()
+    + saveAsHTMLButtonClicked()
+    + saveAsJSONButtonClicked()
+    + sortByNameButtonClicked()
+    + sortByValueClicked()
+    + sortBySerialNumClicked()
+    + searchByNameClicked()
+    + searchByValueClicked()
+
+    - addItem()
+    - loadInventoryFile()
+    - loadTSV()
+    - loadHTML()
+    - loadJSON()
+    - saveTSV()
+    - saveHTML()
+    - saveJSON()
+    - sortByName()
+    - sortByValue()
+    - sortBySerialNumber()
+    - searchByName()
+    - searchBySerialNum()
+}
+
+class inventoryItem
+{
+    double dollarVal
+    String serialNum
+    String name
+
+    + getName() : String
+    + getSerialNum() : String
+    + getDollarVal() : double
+
+    + setDollarVal()
+    + setName()
+    + setSerialNum()
+
+    - hasInvalidCharacter(String) : boolean
+}
+
+
+
+openjfx.org.Application <|-- InventoryManager
+InventoryManager -- mainWindowController
+mainWindowController -- inventoryItem
+@enduml
