@@ -26,9 +26,6 @@ class mainWindowController
     - saveTSV()
     - saveHTML()
     - saveJSON()
-    - sortByName()
-    - sortByValue()
-    - sortBySerialNumber()
     - searchByName()
     - searchBySerialNum()
 }

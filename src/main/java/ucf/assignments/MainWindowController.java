@@ -4,7 +4,6 @@
  */
 package ucf.assignments;
 
-import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -14,10 +13,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 
-import java.awt.*;
-import java.io.IOException;
 import java.text.DecimalFormat;
-import java.text.NumberFormat;
 
 public class MainWindowController {
 
@@ -55,18 +51,6 @@ public class MainWindowController {
         saveJSON();
     }
 
-    public void sortByNameButtonClicked(ActionEvent actionEvent) {
-        sortByName();
-    }
-
-    public void sortByValueClicked(ActionEvent actionEvent) {
-        sortByValue();
-    }
-
-    public void sortBySerialNumClicked(ActionEvent actionEvent) {
-        sortBySerialNumber();
-    }
-
     public void searchByNameClicked(ActionEvent actionEvent) {
         searchByName();
     }
@@ -86,6 +70,7 @@ public class MainWindowController {
     public void editValueButtonClicked(ActionEvent actionEvent) {
         editValue();
     }
+
     public void editSerialNumberButtonClicked(ActionEvent actionEvent) {
         editSerialNumber();
     }
@@ -248,27 +233,6 @@ public class MainWindowController {
     private void saveJSON()
     {
 
-    }
-
-    private void sortByName()
-    {
-        // customize sort for inventory items by name
-        // hold sorted list in a new variable
-        // update table view for sorted list
-    }
-
-    private void sortByValue()
-    {
-        // customize sort for inventory items by value
-        // hold sorted list in a new variable
-        // update table view for sorted list
-    }
-
-    private void sortBySerialNumber()
-    {
-        // customize sort for inventory items by serial number
-        // hold sorted list in a new variable
-        // update table view for sorted list
     }
 
     private void searchByName()

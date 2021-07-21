@@ -29,11 +29,11 @@
             <RowConstraints maxHeight="446.0" minHeight="10.0" prefHeight="446.0" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
-            <TableView fx:id="inventoryTable" prefHeight="400.0" prefWidth="590.0" GridPane.rowIndex="2">
+            <TableView fx:id="inventoryTable" prefHeight="400.0" prefWidth="590.0" style="-: CENTER;" GridPane.rowIndex="2">
               <columns>
-                  <TableColumn fx:id="serialNumberColumn" editable="false" prefWidth="288.0" resizable="false" sortable="false" text="Serial Number" />
-                <TableColumn fx:id="nameColumn" editable="false" minWidth="0.0" prefWidth="288.0" sortable="false" text="Name" />
-                <TableColumn fx:id="valueColumn" editable="false" minWidth="8.0" prefWidth="316.0" sortable="false" text="Value" />
+                  <TableColumn fx:id="serialNumberColumn" editable="false" prefWidth="288.0" resizable="false" style="-fx-alignment: CENTER;" text="Serial Number" />
+                <TableColumn fx:id="nameColumn" editable="false" minWidth="0.0" prefWidth="288.0" style="-fx-alignment: CENTER;" text="Name" />
+                <TableColumn fx:id="valueColumn" editable="false" minWidth="8.0" prefWidth="316.0" style="-fx-alignment: CENTER;" text="Value" />
               </columns>
                <contextMenu>
                   <ContextMenu>
@@ -100,13 +100,6 @@
                         </Menu>
                         <MenuItem mnemonicParsing="false" onAction="#loadButtonClicked" text="Load..." />
                      </items>
-                </Menu>
-                <Menu mnemonicParsing="false" text="Sort">
-                  <items>
-                        <MenuItem mnemonicParsing="false" onAction="#sortByNameButtonClicked" text="By Name" />
-                    <MenuItem mnemonicParsing="false" onAction="#sortByValueClicked" text="By Value" />
-                        <MenuItem mnemonicParsing="false" onAction="#sortBySerialNumClicked" text="By Serial Number" />
-                  </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="Search">
                   <items>
