@@ -31,9 +31,9 @@
          <children>
             <TableView fx:id="inventoryTable" prefHeight="400.0" prefWidth="590.0" style="-: CENTER;" GridPane.rowIndex="2">
               <columns>
+                <TableColumn fx:id="valueColumn" editable="false" minWidth="8.0" prefWidth="316.0" style="-fx-alignment: CENTER;" text="Value" />
                   <TableColumn fx:id="serialNumberColumn" editable="false" prefWidth="288.0" resizable="false" style="-fx-alignment: CENTER;" text="Serial Number" />
                 <TableColumn fx:id="nameColumn" editable="false" minWidth="0.0" prefWidth="288.0" style="-fx-alignment: CENTER;" text="Name" />
-                <TableColumn fx:id="valueColumn" editable="false" minWidth="8.0" prefWidth="316.0" style="-fx-alignment: CENTER;" text="Value" />
               </columns>
                <contextMenu>
                   <ContextMenu>
@@ -48,21 +48,21 @@
             </TableView>
             <GridPane GridPane.rowIndex="1">
               <columnConstraints>
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
               </columnConstraints>
               <rowConstraints>
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <TextField fx:id="serialNumberTextfield" prefHeight="52.0" prefWidth="189.0" promptText="Enter 12-Digit Serial Number">
+                  <TextField fx:id="serialNumberTextfield" prefHeight="52.0" prefWidth="189.0" promptText="Enter 12-Digit Serial Number" GridPane.columnIndex="1">
                      <GridPane.margin>
                         <Insets left="50.0" />
                      </GridPane.margin>
                   </TextField>
-                  <TextField fx:id="nameTextfield" minHeight="-Infinity" minWidth="-Infinity" prefHeight="52.0" prefWidth="189.0" promptText="Enter Item Name" GridPane.columnIndex="1">
+                  <TextField fx:id="nameTextfield" minHeight="-Infinity" minWidth="-Infinity" prefHeight="52.0" prefWidth="189.0" promptText="Enter Item Name" GridPane.columnIndex="2">
                      <GridPane.margin>
                         <Insets left="50.0" />
                      </GridPane.margin>
@@ -72,12 +72,12 @@
                         <Insets left="60.0" />
                      </GridPane.margin>
                   </Button>
-                  <TextField fx:id="valueTextfield" minHeight="-Infinity" minWidth="-Infinity" prefHeight="52.0" prefWidth="189.0" promptText="Enter Dollar Value (X.XX)" GridPane.columnIndex="2">
+                  <TextField fx:id="valueTextfield" minHeight="-Infinity" minWidth="-Infinity" prefHeight="52.0" prefWidth="189.0" promptText="Enter Dollar Value (X.XX)">
                      <GridPane.margin>
                         <Insets left="50.0" />
                      </GridPane.margin>
                   </TextField>
-                  <Text fill="#00ab2e" scaleY="4.0" strokeType="OUTSIDE" strokeWidth="0.0" text="\$" textAlignment="RIGHT" wrappingWidth="22.13671875" GridPane.columnIndex="2">
+                  <Text fill="#00ab2e" scaleY="4.0" strokeType="OUTSIDE" strokeWidth="0.0" text="\$" textAlignment="RIGHT" wrappingWidth="22.13671875">
                      <GridPane.margin>
                         <Insets bottom="7.0" left="25.0" />
                      </GridPane.margin>

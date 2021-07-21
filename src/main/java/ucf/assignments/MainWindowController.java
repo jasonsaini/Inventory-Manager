@@ -8,10 +8,13 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
 import java.text.DecimalFormat;
 
@@ -43,9 +46,7 @@ public class MainWindowController {
         saveTSV();
     }
 
-    public void saveAsHTMLButtonClicked(ActionEvent actionEvent) {
-        saveHTML();
-    }
+    public void saveAsHTMLButtonClicked(ActionEvent actionEvent) { saveHTML(); }
 
     public void saveAsJSONButtonClicked(ActionEvent actionEvent) {
         saveJSON();
@@ -112,40 +113,39 @@ public class MainWindowController {
              // get serial number from SN textfield
             String serialString = serialNumberTextfield.getText();
             // if serial number is not exactly 10 digits
-            if(serialString.length() == 10) {
-                if(!newItem.hasInvalidCharacters(serialString)){
-                    if(itemDataList.size() >= 2) {
-                        if(serialNumberAlreadyExists(serialString))
-                        {
-                            // pre-existing serial number popup!
-                            System.out.println("Exists already");
-
-                        }
-                    }
+            if(serialString.length() != 10 || newItem.hasInvalidCharacters(serialString)) {
+                // ERROR DIALOG for invalid serial number format!
+                sceneManager.setupDialogStage("SN Format Error Dialog", "Invalid Format!", false);
+                return;
+            }
+            else if(itemDataList.size() > 1 && serialNumberAlreadyExists(serialString)) {
+                // SERIAL NUMBER ALREADY EXISTS ALERT
             }
             else {
-                // invalid format popup!
-                    System.out.println("Invalid format");
+                newItem.setSerialNum(serialString);
+
             }
-        newItem.setSerialNum(serialString);
-        System.out.println(newItem.getDollarVal() + newItem.getSerialNum() + newItem.getName());
+        // set cell value factory
         nameColumn.setCellValueFactory(new PropertyValueFactory<InventoryItem,String>("name"));
         valueColumn.setCellValueFactory(new PropertyValueFactory<InventoryItem,String>("dollarVal"));
         serialNumberColumn.setCellValueFactory(new PropertyValueFactory<InventoryItem,String>("serialNum"));
-                itemDataList.add(newItem);
-                inventoryTable.setItems(itemDataList);
+        // add new item to back list
+        itemDataList.add(newItem);
+        // update tabelview to new list
+        inventoryTable.setItems(itemDataList);
 
+        // clear textfields for next entry
+        nameTextfield.clear();
+        serialNumberTextfield.clear();
+        valueTextfield.clear();
     }
 
-
-        // create a new item
-        // add it to observable list
-        // update table view
-    }
-    private boolean serialNumberAlreadyExists(String serialString)
+    public boolean serialNumberAlreadyExists(String serialString)
     {
+        // iterate over back list
         for(int i = 0; i < itemDataList.size(); i++)
         {
+            // if any of the serial numbers match the passed in string
             if(itemDataList.get(i).getSerialNum().equals(serialString))
             {
                 return true;
@@ -157,7 +157,11 @@ public class MainWindowController {
     private void removeItem()
     {
         // get the index of selected item in tableview
+        int selectedIndex = inventoryTable.getSelectionModel().getSelectedIndex();
         // remove item at index from observable list
+        InventoryItem toRemove = itemDataList.get(selectedIndex);
+        itemDataList.remove(toRemove);
+        inventoryTable.setItems(itemDataList);
         // update tableview
 
     }
