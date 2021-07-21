@@ -113,7 +113,7 @@ class editValueController
 
 openjfx.org.Application <|-- InventoryManager
 InventoryManager -- SceneManager
-SceneManager -- mainWindowController
+SceneManager ---- mainWindowController
 
 SceneManager - NameFormatDialogController
 SceneManager - SNFormatDialogController
@@ -125,7 +125,7 @@ mainWindowController - editSerialNumberController
 mainWindowController - editValueController
 
 SerialNumberSearchController - mainWindowController
-NameSearchController = mainWindowController
+NameSearchController - mainWindowController
 
 mainWindowController -- inventoryItem
 
