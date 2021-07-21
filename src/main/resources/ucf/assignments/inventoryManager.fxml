@@ -36,7 +36,7 @@
                 <TableColumn fx:id="nameColumn" editable="false" minWidth="0.0" prefWidth="288.0" style="-fx-alignment: CENTER;" text="Name" />
               </columns>
                <contextMenu>
-                  <ContextMenu>
+                  <ContextMenu fx:id="rightClickMenu">
                     <items>
                       <MenuItem mnemonicParsing="false" onAction="#removeItemButtonClicked" text="Remove Item" />
                         <MenuItem mnemonicParsing="false" onAction="#editNameButtonClicked" text="Edit Name" />

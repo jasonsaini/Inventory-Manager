@@ -9,6 +9,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
+import javafx.scene.control.ContextMenu;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -31,6 +32,9 @@ public class MainWindowController {
 
     @FXML
     TableColumn <InventoryItem, String> serialNumberColumn, nameColumn, valueColumn;
+
+    @FXML
+    ContextMenu rightClickMenu;
 
     DecimalFormat decimalFormat = new DecimalFormat("#0.00");
 
@@ -92,6 +96,8 @@ public class MainWindowController {
                 {
                     // show invalid format popup!
                     nameTextfield.clear();
+                    sceneManager.setupDialogStage("Name Format Error Dialog", "Invalid Format!", false);
+                    return;
                 }
                 else
                 {
@@ -107,8 +113,9 @@ public class MainWindowController {
                 newItem.setDollarVal("$" + decimalFormat.format(curVal));
             }
             catch(Exception e) {
-                e.printStackTrace();
                 // show invalid format popup!
+                sceneManager.setupDialogStage("Value Format Error Dialog", "Invalid Format!", false);
+                return;
             }
              // get serial number from SN textfield
             String serialString = serialNumberTextfield.getText();
@@ -125,12 +132,14 @@ public class MainWindowController {
                 newItem.setSerialNum(serialString);
 
             }
-        // set cell value factory
+        // set cell value factories
         nameColumn.setCellValueFactory(new PropertyValueFactory<InventoryItem,String>("name"));
         valueColumn.setCellValueFactory(new PropertyValueFactory<InventoryItem,String>("dollarVal"));
         serialNumberColumn.setCellValueFactory(new PropertyValueFactory<InventoryItem,String>("serialNum"));
+
         // add new item to back list
         itemDataList.add(newItem);
+
         // update tabelview to new list
         inventoryTable.setItems(itemDataList);
 
@@ -156,14 +165,19 @@ public class MainWindowController {
 
     private void removeItem()
     {
-        // get the index of selected item in tableview
-        int selectedIndex = inventoryTable.getSelectionModel().getSelectedIndex();
-        // remove item at index from observable list
-        InventoryItem toRemove = itemDataList.get(selectedIndex);
-        itemDataList.remove(toRemove);
-        inventoryTable.setItems(itemDataList);
-        // update tableview
-
+        try {
+            // get the index of selected item in tableview
+            int selectedIndex = inventoryTable.getSelectionModel().getSelectedIndex();
+            // remove item at index from observable list
+            InventoryItem toRemove = itemDataList.get(selectedIndex);
+            itemDataList.remove(toRemove);
+            inventoryTable.setItems(itemDataList);
+            // update tableview
+        }
+        catch(Exception e)
+        {
+            // do nothing on catch
+        }
     }
 
     private void editName()
@@ -256,7 +270,5 @@ public class MainWindowController {
                 // add item to temp list
         // update search tableview with temp list
     }
-
-
 
 }

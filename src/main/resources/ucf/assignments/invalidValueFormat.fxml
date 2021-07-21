@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DialogPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<DialogPane xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ucf.assignments.ValueFormatDialogController">
+    <content>
+        <GridPane fx:id="NameFormatGridPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="400.0">
+            <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints maxHeight="144.0" minHeight="10.0" prefHeight="67.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="277.0" minHeight="10.0" prefHeight="163.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="277.0" minHeight="10.0" prefHeight="53.0" vgrow="SOMETIMES" />
+            </rowConstraints>
+            <children>
+                <Text fill="RED" strokeType="OUTSIDE" strokeWidth="0.0" text="Invalid Value Format!" wrappingWidth="396.904296875">
+                    <font>
+                        <Font size="22.0" />
+                    </font>
+                    <GridPane.margin>
+                        <Insets left="10.0" />
+                    </GridPane.margin>
+                </Text>
+                <TextArea prefHeight="119.0" prefWidth="360.0" text="A value must be set in the format of&#10;XX.XX with only numbers.&#10;Do not include a dollar sign. &#10;Decimal values past the hundreths place &#10;will be rounded." GridPane.columnSpan="2" GridPane.rowIndex="1">
+                    <GridPane.margin>
+                        <Insets left="10.0" right="10.0" />
+                    </GridPane.margin>
+                    <font>
+                        <Font size="18.0" />
+                    </font>
+                </TextArea>
+                <Button fx:id="ValueOkButton" mnemonicParsing="false" onAction="#VFOKDialogClicked" prefHeight="51.0" prefWidth="121.0" text="OK!" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                    <opaqueInsets>
+                        <Insets />
+                    </opaqueInsets>
+                    <GridPane.margin>
+                        <Insets left="30.0" top="5.0" />
+                    </GridPane.margin>
+                </Button>
+            </children>
+        </GridPane>
+    </content>
+</DialogPane>
