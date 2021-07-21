@@ -7,8 +7,19 @@ class InventoryManager
 
 class mainWindowController
 {
+    + serialNumTextField, valueTextField, nameTextField : TextField
+    + itemDataList : ObservableList<InventoryItem>
+    + inventoryTable : TableView
+    + nameColumn, SerialNumberColumn, valueColumn : TableColumn
+    + rightClickMenu : ContextMenu
+    + decimalFormat : DecimalFormat
+
+
     + addItemButtonClicked()
-    + loaddButtonClicked()
+    + loadButtonClicked()
+    + editNameButtonClicked()
+    + editSerialNumberButtonClicked()
+    + editValueButtonClicked()
     + saveAsTSVButtonClicked()
     + saveAsHTMLButtonClicked()
     + saveAsJSONButtonClicked()
@@ -23,6 +34,9 @@ class mainWindowController
     - loadTSV()
     - loadHTML()
     - loadJSON()
+    - editName()
+    - editValue()
+    - editSerialNumber()
     - saveTSV()
     - saveHTML()
     - saveJSON()
@@ -51,6 +65,49 @@ class SceneManager
 {
     load()
     getScene(String) : Scene
+    setupDialogStage(String sceneName, string title, boolean resizeable)
+    setupDialogStageWithSingleItem(String sceneName, string title, boolean resizeable, InventoryItem)
+    setupDialogStageWithSingleItem(String sceneName, string title, boolean resizeable, ObservableList<InventoryItem>)
+
+}
+
+class NameFormatDialogController
+{
+    + nameFormatGridPane : GridPane
+    + NFDialogCLicked()
+}
+
+class SNFormatDialogController
+{
+   + outerGridPane : GridPane
+   + clearSerialNumberFieldClicked()
+}
+
+class ValueFormatDialogController
+{
+    + valueOkButton : Button
+    + VFOkClicked()
+}
+
+class editNameController
+{
+    + editNameTextField : TextField
+    + changeItemNameButtonClicked()
+    + setNewName()
+}
+
+class editSerialNumberController
+{
+    + editSerialNumberTextField : TextField
+    + changeSerialNumberButtonClicked()
+    + setNewSerialNumber()
+}
+
+class editValueController
+{
+    + editValueTextField : TextField
+    + changeValueButtonClicked()
+    + setNewValue()
 }
 
 
