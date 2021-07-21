@@ -4,6 +4,7 @@
  */
 package ucf.assignments;
 
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -31,6 +32,7 @@ public class SceneManager {
             SNFormatDialogRoot = FXMLLoader.load(getClass().getResource("invalidSNFormat.fxml"));
             nameFormatDialogRoot = FXMLLoader.load(getClass().getResource("invalidNameFormat.fxml"));
             valueFormatDialogRoot = FXMLLoader.load(getClass().getResource("invalidValueFormat.fxml"));
+            editNameRoot = FXMLLoader.load(getClass().getResource("editName.fxml"));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -38,6 +40,8 @@ public class SceneManager {
         SNFormatDialogWindow = new Scene(SNFormatDialogRoot);
         nameFormatErrorDialogWindow = new Scene(nameFormatDialogRoot);
         valueFormatErrorDialogWindow = new Scene(valueFormatDialogRoot);
+        editNameWindow = new Scene(editNameRoot);
+
     }
 
     public Scene getScene(String key)
@@ -46,11 +50,9 @@ public class SceneManager {
         {
             case "Main Window":
                 return mainWindow;
-            case "Edit Name":
-                return editNameWindow;
-            case "Edit Serial Number":
+            case "Edit Serial Number Dialog":
                 return editSerialNumberWindow;
-            case "Edit Value":
+            case "Edit Value Dialog":
                 return editValueWindow;
             case "Name Format Error Dialog":
                 return nameFormatErrorDialogWindow;
@@ -58,6 +60,8 @@ public class SceneManager {
                 return SNFormatDialogWindow;
             case "Value Format Error Dialog":
                 return valueFormatErrorDialogWindow;
+            case "Edit Name Dialog":
+                return editNameWindow;
         }
         return null;
     }
@@ -73,6 +77,28 @@ public class SceneManager {
         curStage.showAndWait();
     }
 
+    public void setupDialogStageWithSingleItem(String sceneName, String title, boolean resizable, InventoryItem userData)
+    {
+        Scene curScene = getScene(sceneName);
+        Stage curStage = new Stage();
+        curStage.setScene(curScene);
+        curStage.setTitle(title);
+        curStage.setResizable(resizable);
+        curStage.setUserData(userData);
+        curStage.initModality(Modality.APPLICATION_MODAL);
+        curStage.showAndWait();
+    }
 
+    public void setupDialogStageWithList(String sceneName, String title, boolean resizable, ObservableList<InventoryItem> userData)
+    {
+        Scene curScene = getScene(sceneName);
+        Stage curStage = new Stage();
+        curStage.setScene(curScene);
+        curStage.setTitle(title);
+        curStage.setResizable(resizable);
+        curStage.setUserData(userData);
+        curStage.initModality(Modality.APPLICATION_MODAL);
+        curStage.showAndWait();
+    }
 
 }

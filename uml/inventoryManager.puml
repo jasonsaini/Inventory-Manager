@@ -57,5 +57,19 @@ class SceneManager
 openjfx.org.Application <|-- InventoryManager
 InventoryManager -- SceneManager
 SceneManager -- mainWindowController
+
+SceneManager - NameFormatDialogController
+SceneManager - SNFormatDialogController
+ValueFormatDialogController - SceneManager
+
+
+mainWindowController - editNameController
+mainWindowController - editSerialNumberController
+mainWindowController - editValueController
+
+SerialNumberSearchController - mainWindowController
+NameSearchController = mainWindowController
+
 mainWindowController -- inventoryItem
+
 @enduml

@@ -8,14 +8,11 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Scene;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
 
 import java.text.DecimalFormat;
 
@@ -38,6 +35,7 @@ public class MainWindowController {
 
     DecimalFormat decimalFormat = new DecimalFormat("#0.00");
 
+    SceneManager sceneManager = new SceneManager();
     public void addItemButtonClicked(ActionEvent actionEvent) {
         addItem();
     }
@@ -84,7 +82,7 @@ public class MainWindowController {
     private void addItem()
     {
         // initialize scenemanager
-        SceneManager sceneManager = new SceneManager();
+
         sceneManager.load();
         // create inventory item object
         InventoryItem newItem = new InventoryItem();
@@ -183,10 +181,16 @@ public class MainWindowController {
     private void editName()
     {
         // store index of selected item
+        int selectedIndex = inventoryTable.getSelectionModel().getSelectedIndex();
+        // store item to edit
+        InventoryItem toSend =  itemDataList.get(selectedIndex);
         // open popup window
-        // collect new name from text field
-        // set new name in observable list
+        sceneManager.setupDialogStageWithSingleItem("Edit Name Dialog", "Edit", false,toSend);
+        // clear selected index
+        inventoryTable.getSelectionModel().clearSelection();
         // update tableview
+        inventoryTable.setItems(itemDataList);
+        inventoryTable.refresh();
         // close popup
     }
 
