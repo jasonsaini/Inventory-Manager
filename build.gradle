@@ -27,4 +27,4 @@ javafx{
     modules = ['javafx.controls', 'javafx.fxml', 'javafx.media']
 }
 
-mainClassName = 'ucf.assignments.inventoryManager'
+mainClassName = 'ucf.assignments.InventoryManager'

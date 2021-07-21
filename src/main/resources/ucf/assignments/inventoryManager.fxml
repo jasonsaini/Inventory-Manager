@@ -2,6 +2,7 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ContextMenu?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
@@ -12,9 +13,10 @@
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-
-<AnchorPane prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ucf.assignments.mainWindowController">
+<AnchorPane prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ucf.assignments.MainWindowController">
    <children>
       <GridPane prefHeight="600.0" prefWidth="900.0">
          <columnConstraints>
@@ -27,12 +29,22 @@
             <RowConstraints maxHeight="446.0" minHeight="10.0" prefHeight="446.0" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
-            <TableView prefHeight="400.0" prefWidth="590.0" GridPane.rowIndex="2">
+            <TableView fx:id="inventoryTable" prefHeight="400.0" prefWidth="590.0" GridPane.rowIndex="2">
               <columns>
-                  <TableColumn editable="false" prefWidth="288.0" resizable="false" sortable="false" text="Serial Number" />
-                <TableColumn minWidth="0.0" prefWidth="288.0" text="Name" />
-                <TableColumn minWidth="8.0" prefWidth="316.0" text="Value ($)" />
+                  <TableColumn fx:id="serialNumberColumn" editable="false" prefWidth="288.0" resizable="false" sortable="false" text="Serial Number" />
+                <TableColumn fx:id="nameColumn" editable="false" minWidth="0.0" prefWidth="288.0" sortable="false" text="Name" />
+                <TableColumn fx:id="valueColumn" editable="false" minWidth="8.0" prefWidth="316.0" sortable="false" text="Value" />
               </columns>
+               <contextMenu>
+                  <ContextMenu>
+                    <items>
+                      <MenuItem mnemonicParsing="false" onAction="#removeItemButtonClicked" text="Remove Item" />
+                        <MenuItem mnemonicParsing="false" onAction="#editNameButtonClicked" text="Edit Name" />
+                        <MenuItem mnemonicParsing="false" onAction="#editValueButtonClicked" text="Edit Value" />
+                        <MenuItem mnemonicParsing="false" onAction="#editSerialNumberButtonClicked" text="Edit Serial Number" />
+                    </items>
+                  </ContextMenu>
+               </contextMenu>
             </TableView>
             <GridPane GridPane.rowIndex="1">
               <columnConstraints>
@@ -45,12 +57,12 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <TextField prefHeight="52.0" prefWidth="189.0" promptText="Enter 12-Digit Serial Number">
+                  <TextField fx:id="serialNumberTextfield" prefHeight="52.0" prefWidth="189.0" promptText="Enter 12-Digit Serial Number">
                      <GridPane.margin>
                         <Insets left="50.0" />
                      </GridPane.margin>
                   </TextField>
-                  <TextField minHeight="-Infinity" minWidth="-Infinity" prefHeight="52.0" prefWidth="189.0" promptText="Enter Item Name" GridPane.columnIndex="1">
+                  <TextField fx:id="nameTextfield" minHeight="-Infinity" minWidth="-Infinity" prefHeight="52.0" prefWidth="189.0" promptText="Enter Item Name" GridPane.columnIndex="1">
                      <GridPane.margin>
                         <Insets left="50.0" />
                      </GridPane.margin>
@@ -60,11 +72,19 @@
                         <Insets left="60.0" />
                      </GridPane.margin>
                   </Button>
-                  <TextField minHeight="-Infinity" minWidth="-Infinity" prefHeight="52.0" prefWidth="189.0" promptText="Enter Dollar Value...." GridPane.columnIndex="2">
+                  <TextField fx:id="valueTextfield" minHeight="-Infinity" minWidth="-Infinity" prefHeight="52.0" prefWidth="189.0" promptText="Enter Dollar Value (X.XX)" GridPane.columnIndex="2">
                      <GridPane.margin>
                         <Insets left="50.0" />
                      </GridPane.margin>
                   </TextField>
+                  <Text fill="#00ab2e" scaleY="4.0" strokeType="OUTSIDE" strokeWidth="0.0" text="\$" textAlignment="RIGHT" wrappingWidth="22.13671875" GridPane.columnIndex="2">
+                     <GridPane.margin>
+                        <Insets bottom="7.0" left="25.0" />
+                     </GridPane.margin>
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Text>
                </children>
             </GridPane>
             <MenuBar prefHeight="65.0" prefWidth="900.0">

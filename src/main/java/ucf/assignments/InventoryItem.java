@@ -1,7 +1,9 @@
 package ucf.assignments;
 
-public class inventoryItem {
-    double dollarVal;
+import java.text.DecimalFormat;
+
+public class InventoryItem {
+    String dollarVal;
     String serialNum;
     String name;
 
@@ -14,12 +16,12 @@ public class inventoryItem {
         return serialNum;
     }
 
-    public double getDollarVal()
+    public String getDollarVal()
     {
         return dollarVal;
     }
 
-    public void setDollarVal(double val)
+    public void setDollarVal(String val)
     {
         this.dollarVal = val;
     }
@@ -31,15 +33,16 @@ public class inventoryItem {
 
     public void setSerialNum(String newSerialNum)
     {
-
-        if(newSerialNum.length() != 10 || hasInvalidCharacters(newSerialNum))
-        {
-            this.serialNum = null;
-        }
         this.serialNum = newSerialNum.toUpperCase();
     }
 
-    private boolean hasInvalidCharacters(String serialString)
+    public String stringifyDollarValue()
+    {
+        DecimalFormat df = new DecimalFormat("0.00");
+        return "$" + df.format(this.dollarVal);
+    }
+
+    public boolean hasInvalidCharacters(String serialString)
     {
         String invalidChars = "~!@#$%^&*()-_+=/?'\"[]{}|;:,<.>";
         for(int i = 0; i < serialString.length(); i++)
@@ -51,6 +54,7 @@ public class inventoryItem {
         }
         return false;
     }
+
 
 
 

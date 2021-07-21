@@ -35,9 +35,9 @@ class mainWindowController
 
 class inventoryItem
 {
-    double dollarVal
-    String serialNum
-    String name
+    dollarVal : String
+    serialNum : String
+    name : String
 
     + getName() : String
     + getSerialNum() : String
@@ -50,9 +50,15 @@ class inventoryItem
     - hasInvalidCharacter(String) : boolean
 }
 
+class SceneManager
+{
+    load()
+    getScene(String) : Scene
+}
 
 
 openjfx.org.Application <|-- InventoryManager
-InventoryManager -- mainWindowController
+InventoryManager -- SceneManager
+SceneManager -- mainWindowController
 mainWindowController -- inventoryItem
 @enduml
