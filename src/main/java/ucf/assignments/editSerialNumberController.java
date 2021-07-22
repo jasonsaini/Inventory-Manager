@@ -32,18 +32,17 @@ public class editSerialNumberController {
             SceneManager sm = new SceneManager();
             sm.load();
             sm.setupDialogStage("SN Format Error Dialog", "Invalid Format", false);
-            try
-            {
+            try {
                 wait();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
-            catch(Exception e)
-            {
-                // do nothing
-            }
+
+
         }
         else
         {
-            cur.serialNum = newSerialNumber;
+            cur.setSerialNum(newSerialNumber);
         }
 
     }
