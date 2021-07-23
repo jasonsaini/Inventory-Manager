@@ -34,7 +34,7 @@ public class editValueController {
         catch(Exception e)
         {
             SceneManager sm = new SceneManager();
-            sm.load();
+            sm.loadAll();
             sm.setupDialogStage("Value Format Error Dialog", "Invalid format!", false);
             try {
                 wait();

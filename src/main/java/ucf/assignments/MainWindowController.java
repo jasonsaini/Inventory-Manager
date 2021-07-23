@@ -83,7 +83,7 @@ public class MainWindowController {
     {
         // initialize scenemanager
 
-        sceneManager.load();
+        sceneManager.loadAll();
         // create inventory item object
         InventoryItem newItem = new InventoryItem();
 
@@ -228,7 +228,6 @@ public class MainWindowController {
     private void loadFile()
     {
         // find file via file chooser
-
         // if file is TSV
             // call load TSV function
         // if file is HTML
@@ -269,20 +268,24 @@ public class MainWindowController {
 
     private void searchByName()
     {
-        // create a temp list of inventory items
-        // iterate through entire list
-            // if search key is a substring of an item's name
-                // add item to temp list
-        // update search tableview
+        // send back list to new window
+        // do not open if inventory is not populated
+        if(itemDataList.size() > 0)
+        {
+            sceneManager.setupDialogStageWithList("Name Search", "Search", false, itemDataList);
+        }
+
     }
 
     private void searchBySerialNum()
     {
-        // create a temp list of inventory items
-        // iterate through entire list
-            // if search key matches item's serial number
-                // add item to temp list
-        // update search tableview with temp list
+        // send back list to new search window
+        // do not open if inventory is not populated
+        if(itemDataList.size() > 0)
+        {
+            sceneManager.setupDialogStageWithList("SN Search", "Search", false, itemDataList);
+        }
+
     }
 
 }

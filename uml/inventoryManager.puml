@@ -54,9 +54,9 @@ class inventoryItem
     + getSerialNum() : String
     + getDollarVal() : double
 
-    + setDollarVal()
-    + setName()
-    + setSerialNum()
+    + setDollarVal(double)
+    + setName(String)
+    + setSerialNum(String)
 
     - hasInvalidCharacter(String) : boolean
 }

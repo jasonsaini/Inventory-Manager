@@ -16,9 +16,9 @@ import java.io.IOException;
 
 public class SceneManager {
     public Scene mainWindow, editNameWindow, editSerialNumberWindow, editValueWindow,SNFormatDialogWindow, nameFormatErrorDialogWindow,
-    valueFormatErrorDialogWindow, existingSNWindow;
+    valueFormatErrorDialogWindow, existingSNWindow, searchNameWindow, searchSerialNumberWindow;
 
-    public void load(){
+    public void loadAll(){
 
         Parent mainRoot = null;
         Parent editNameRoot = null;
@@ -28,6 +28,8 @@ public class SceneManager {
         Parent SNFormatDialogRoot = null;
         Parent valueFormatDialogRoot = null;
         Parent existingSNRoot = null;
+        Parent searchNameRoot = null;
+        Parent searchSerialRoot = null;
         try {
             mainRoot = FXMLLoader.load(getClass().getResource("inventoryManager.fxml"));
             SNFormatDialogRoot = FXMLLoader.load(getClass().getResource("invalidSNFormat.fxml"));
@@ -37,6 +39,8 @@ public class SceneManager {
             editValueRoot = FXMLLoader.load(getClass().getResource("editValue.fxml"));
             editSNRoot = FXMLLoader.load(getClass().getResource("editSerialNumber.fxml"));
             existingSNRoot = FXMLLoader.load(getClass().getResource("ExistingSNPopup.fxml"));
+            searchNameRoot = FXMLLoader.load(getClass().getResource("nameSearch.fxml"));
+            searchSerialRoot = FXMLLoader.load(getClass().getResource("serialNumberSearch.fxml"));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -48,7 +52,8 @@ public class SceneManager {
         editValueWindow = new Scene(editValueRoot);
         editSerialNumberWindow = new Scene(editSNRoot);
         existingSNWindow = new Scene(existingSNRoot);
-
+        searchNameWindow = new Scene(searchNameRoot);
+        searchSerialNumberWindow = new Scene(searchSerialRoot);
     }
 
     public Scene getScene(String key)
@@ -71,7 +76,10 @@ public class SceneManager {
                 return editNameWindow;
             case "Existing SN":
                 return existingSNWindow;
-
+            case "Name Search":
+                return searchNameWindow;
+            case "SN Search":
+                return searchSerialNumberWindow;
         }
         return null;
     }

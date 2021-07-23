@@ -29,7 +29,7 @@ public class editNameController {
         if(newName.length() > 256 || newName.length() < 2)
         {
             SceneManager sm = new SceneManager();
-            sm.load();
+            sm.loadAll();
             sm.setupDialogStage("Name Format Error Dialog", "Invalid Format", false);
             try {
                 wait();

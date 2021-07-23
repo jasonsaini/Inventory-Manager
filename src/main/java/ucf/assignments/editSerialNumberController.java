@@ -30,7 +30,7 @@ public class editSerialNumberController {
         if(newSerialNumber.length() != 10 || new InventoryItem().hasInvalidCharacters(newSerialNumber))
         {
             SceneManager sm = new SceneManager();
-            sm.load();
+            sm.loadAll();
             sm.setupDialogStage("SN Format Error Dialog", "Invalid Format", false);
             try {
                 wait();

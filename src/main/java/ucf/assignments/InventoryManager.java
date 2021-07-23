@@ -19,7 +19,7 @@ public class InventoryManager extends Application{
     public void start(Stage primaryStage)
     {
         SceneManager sceneManager = new SceneManager();
-        sceneManager.load();
+        sceneManager.loadAll();
         Scene scene = sceneManager.getScene("Main Window");
         primaryStage.setScene(scene);
         primaryStage.setTitle("Jason's Inventory Manager");
