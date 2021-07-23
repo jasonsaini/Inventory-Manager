@@ -13,7 +13,13 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 
+import java.io.File;
+import java.io.FileWriter;
 import java.text.DecimalFormat;
 
 public class MainWindowController {
@@ -227,7 +233,9 @@ public class MainWindowController {
 
     private void loadFile()
     {
+        itemDataList.clear();
         // find file via file chooser
+        FileChooser chooser = null;
         // if file is TSV
             // call load TSV function
         // if file is HTML
@@ -263,7 +271,31 @@ public class MainWindowController {
 
     private void saveJSON()
     {
+        JSONObject dataObj= new JSONObject();
+        JSONArray inventoryArray = new JSONArray();
+        FileChooser fileChooser = new FileChooser();
+        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("JSON file (*.json)", "*.json");
+        fileChooser.getExtensionFilters().add(extFilter);
+        File saveJSONFile = fileChooser.showSaveDialog(new Stage());
+        for(int i = 0; i < itemDataList.size(); i++)
+        {
+            JSONObject temp = new JSONObject();
+            temp.put("value" , itemDataList.get(i).getDollarVal());
+            temp.put("serialNum", itemDataList.get(i).getSerialNum());
+            temp.put("name", itemDataList.get(i).getName());
+            inventoryArray.add(temp);
+        }
+        dataObj.put("inventory", inventoryArray);
+        try
+        {
+            FileWriter writer = new FileWriter(saveJSONFile);
+            writer.write(dataObj.toString());
+            writer.close();
+        }
+        catch(Exception e)
+        {
 
+        }
     }
 
     private void searchByName()
