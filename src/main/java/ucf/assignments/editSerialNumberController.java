@@ -27,7 +27,7 @@ public class editSerialNumberController {
     public void changeSerialNumber(InventoryItem cur)
     {
         String newSerialNumber = editSNTextField.getText();
-        if(newSerialNumber.length() != 10 || new InventoryItem().hasInvalidCharacters(newSerialNumber))
+        if(newSerialNumber.length() != 10 ||  InventoryItem.hasInvalidCharacters(newSerialNumber))
         {
             SceneManager sm = new SceneManager();
             sm.loadAll();

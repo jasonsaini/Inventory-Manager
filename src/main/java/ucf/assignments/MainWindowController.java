@@ -20,12 +20,10 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.text.DecimalFormat;
 import java.util.Iterator;
+import java.util.Scanner;
 
 public class MainWindowController {
 
@@ -96,7 +94,7 @@ public class MainWindowController {
 
         sceneManager.loadAll();
         // create inventory item object
-        InventoryItem newItem = new InventoryItem();
+        InventoryItem newItem = new InventoryItem("","","");
 
         // get item name from name textfield
         String curName = nameTextfield.getText();
@@ -247,6 +245,7 @@ public class MainWindowController {
         FileChooser chooser = new FileChooser();
         File toLoad = chooser.showOpenDialog(new Stage());
 
+        chooser.getExtensionFilters().addAll();
         // get file extension
         String filename = toLoad.getName();
         String fileExtension = filename.substring(filename.indexOf(".") + 1, filename.length());
@@ -254,6 +253,7 @@ public class MainWindowController {
             if(fileExtension.equals("tsv"))
             {
                 // load TSV
+                loadTSV(toLoad);
             }
             else if(fileExtension.equals("html"))
             {
@@ -265,9 +265,25 @@ public class MainWindowController {
 
     }
 
-    private void loadTSV()
+    private void loadTSV(File toLoad)
     {
-        
+        itemDataList.clear();
+        System.out.println("Loading tsv...");
+        try {
+            Scanner fileScanner = new Scanner(toLoad);
+            while(fileScanner.hasNextLine())
+            {
+
+                String toParse = fileScanner.nextLine();
+                String[] arrayToParse = toParse.split("\t");
+                itemDataList.add(new InventoryItem(arrayToParse[0], arrayToParse[1], arrayToParse[2]));
+            }
+            fileScanner.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        inventoryTable.setItems(itemDataList);
+        inventoryTable.refresh();
     }
     
     private void loadHTML()
@@ -289,10 +305,7 @@ public class MainWindowController {
                 String curSN = (String) curObject.get("serialNum");
                 String curName = (String)curObject.get("name");
                 String curVal = (String) curObject.get("value");
-                InventoryItem temp = new InventoryItem();
-                temp.setSerialNum(curSN);
-                temp.setName(curName);
-                temp.setDollarVal(curVal);
+                InventoryItem temp = new InventoryItem(curVal, curSN, curName);
                 itemDataList.add(temp);
             }
             inventoryTable.setItems(itemDataList);
@@ -308,6 +321,24 @@ public class MainWindowController {
 
     private void saveTSV()
     {
+        FileChooser chooser = new FileChooser();
+
+        FileChooser.ExtensionFilter extensionFilter = new FileChooser.ExtensionFilter("TSV file (*.tsv)", "*.tsv");
+        chooser.getExtensionFilters().add(extensionFilter);
+        File toSave = chooser.showSaveDialog(new Stage());
+        try {
+            FileWriter writer = new FileWriter(toSave);
+            for(int i = 0; i < itemDataList.size(); i++)
+            {
+                InventoryItem curItem = itemDataList.get(i);
+                String curLine= curItem.getDollarVal() + "\t" + curItem.getSerialNum() + "\t" + curItem.getName() + "\n";
+                writer.append(curLine);
+            }
+            writer.close();
+        } catch (IOException e) {
+
+        }
+
 
     }
 

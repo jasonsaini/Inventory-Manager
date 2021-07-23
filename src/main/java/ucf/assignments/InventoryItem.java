@@ -40,13 +40,20 @@ public class InventoryItem {
         this.serialNum = newSerialNum.toUpperCase();
     }
 
+    public InventoryItem(String Value, String SerialNumber, String Name)
+    {
+        this.dollarVal = Value;
+        this.serialNum = SerialNumber;
+        this.name = Name;
+    }
+
     public String stringifyDollarValue()
     {
         DecimalFormat df = new DecimalFormat("0.00");
         return "$" + df.format(this.dollarVal);
     }
 
-    public boolean hasInvalidCharacters(String serialString)
+    public static boolean hasInvalidCharacters(String serialString)
     {
         String invalidChars = "~!@#$%^&*()-_+=/?'\"[]{}|;:,<.>";
         for(int i = 0; i < serialString.length(); i++)
