@@ -17,10 +17,15 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.text.DecimalFormat;
+import java.util.Iterator;
 
 public class MainWindowController {
 
@@ -233,15 +238,31 @@ public class MainWindowController {
 
     private void loadFile()
     {
+        nameColumn.setCellValueFactory(new PropertyValueFactory<InventoryItem,String>("name"));
+        valueColumn.setCellValueFactory(new PropertyValueFactory<InventoryItem,String>("dollarVal"));
+        serialNumberColumn.setCellValueFactory(new PropertyValueFactory<InventoryItem,String>("serialNum"));
+
         itemDataList.clear();
         // find file via file chooser
-        FileChooser chooser = null;
+        FileChooser chooser = new FileChooser();
+        File toLoad = chooser.showOpenDialog(new Stage());
+
+        // get file extension
+        String filename = toLoad.getName();
+        String fileExtension = filename.substring(filename.indexOf(".") + 1, filename.length());
         // if file is TSV
-            // call load TSV function
-        // if file is HTML
-            // call load HTML function
-        // if file is JSON
-            // call load JSON function
+            if(fileExtension.equals("tsv"))
+            {
+                // load TSV
+            }
+            else if(fileExtension.equals("html"))
+            {
+                // load HTML
+            }
+            else if(fileExtension.equals("json")) {
+                loadJSON(toLoad);
+            }
+
     }
 
     private void loadTSV()
@@ -254,8 +275,34 @@ public class MainWindowController {
 
     }
 
-    private void loadJSON()
+    private void loadJSON(File toLoad)
     {
+        try {
+            Object obj = new JSONParser().parse(new FileReader(toLoad));
+            JSONObject object = (JSONObject) obj;
+            JSONArray itemArray =(JSONArray)object.get("inventory");
+            itemDataList.clear();
+            Iterator i = itemArray.iterator();
+            while(i.hasNext())
+            {
+                JSONObject curObject = (JSONObject) i.next();
+                String curSN = (String) curObject.get("serialNum");
+                String curName = (String)curObject.get("name");
+                String curVal = (String) curObject.get("value");
+                InventoryItem temp = new InventoryItem();
+                temp.setSerialNum(curSN);
+                temp.setName(curName);
+                temp.setDollarVal(curVal);
+                itemDataList.add(temp);
+            }
+            inventoryTable.setItems(itemDataList);
+            inventoryTable.refresh();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
 
     }
 
