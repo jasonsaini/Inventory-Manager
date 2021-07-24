@@ -24,7 +24,7 @@ public class InventoryManager extends Application{
         primaryStage.setScene(scene);
         primaryStage.setTitle("Jason's Inventory Manager");
         primaryStage.show();
-
+        primaryStage.setResizable(false);
     }
 
 

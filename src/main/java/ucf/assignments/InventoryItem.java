@@ -47,12 +47,6 @@ public class InventoryItem {
         this.name = Name;
     }
 
-    public String stringifyDollarValue()
-    {
-        DecimalFormat df = new DecimalFormat("0.00");
-        return "$" + df.format(this.dollarVal);
-    }
-
     public static boolean hasInvalidCharacters(String serialString)
     {
         String invalidChars = "~!@#$%^&*()-_+=/?'\"[]{}|;:,<.>";

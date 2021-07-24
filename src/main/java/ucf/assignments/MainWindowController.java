@@ -22,6 +22,8 @@ import org.json.simple.parser.ParseException;
 
 import java.io.*;
 import java.text.DecimalFormat;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.Iterator;
 import java.util.Scanner;
 
@@ -258,6 +260,7 @@ public class MainWindowController {
             else if(fileExtension.equals("html"))
             {
                 // load HTML
+
             }
             else if(fileExtension.equals("json")) {
                 loadJSON(toLoad);
@@ -344,6 +347,36 @@ public class MainWindowController {
 
     private void saveHTML()
     {
+        File HTMLTemplate = new File("src/main/resources/ucf/assignments/tableTemplate.html");
+        FileChooser chooser = new FileChooser();
+        FileChooser.ExtensionFilter extensionFilter = new FileChooser.ExtensionFilter("HTML file (*.html)", "*.html");
+        chooser.getExtensionFilters().add(extensionFilter);
+        File toSave = chooser.showSaveDialog(new Stage());
+        String HTMLString = "";
+        try {
+            HTMLString = Files.readString(Path.of(HTMLTemplate.getPath()));
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        String tableString = "";
+        for(int i = 0; i < itemDataList.size(); i++)
+        {
+            InventoryItem curItem = itemDataList.get(i);
+            String tempTableString = "<tr>\n<td>" + curItem.getDollarVal() + "</td>\n" +
+                    "<td>" + curItem.getSerialNum() + "</td>\n" +
+                    "<td>" + curItem.getName() + "</td>\n </tr>\n";
+            tableString += tempTableString;
+        }
+        HTMLString = HTMLString.replace("$data", tableString);
+        System.out.print(HTMLString);
+        try {
+            FileWriter writer = new FileWriter(toSave);
+            writer.write(HTMLString);
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
     }
 
