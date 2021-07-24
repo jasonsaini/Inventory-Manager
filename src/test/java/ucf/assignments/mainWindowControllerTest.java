@@ -10,6 +10,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class mainWindowControllerTest {
 
+    // no need to test sorts, functionality within JAVAFx TableView/TableColumns
+
     @Test
     void stores_at_least_100_items()
     {
