@@ -16,6 +16,7 @@ class mainWindowController
 
 
     + addItemButtonClicked()
+    + removeItemButtonClicked()
     + loadButtonClicked()
     + editNameButtonClicked()
     + editSerialNumberButtonClicked()
@@ -30,6 +31,7 @@ class mainWindowController
     + searchByValueClicked()
 
     - addItem()
+    - removeItem()
     - loadInventoryFile()
     - loadTSV()
     - loadHTML()
@@ -63,7 +65,7 @@ class inventoryItem
 
 class SceneManager
 {
-    load()
+    loadAll()
     getScene(String) : Scene
     setupDialogStage(String sceneName, string title, boolean resizeable)
     setupDialogStageWithSingleItem(String sceneName, string title, boolean resizeable, InventoryItem)
@@ -108,6 +110,28 @@ class editValueController
     + editValueTextField : TextField
     + changeValueButtonClicked()
     + setNewValue()
+}
+
+class SerialNumberSearchController
+{
+    searchList : ObservableList<InventoryItem>
+    SN searchTable : TableView
+    SNSearchNameColumn, SNValueColumn, SNSearchSNColumn : TableColumn
+    searchSNTextField : TextField
+
+    serialNumberSearchItemButtonClicked()
+
+}
+
+class NameSearchController
+{
+    searchList : ObservableList<InventoryItem>
+    SN searchTable : TableView
+    nameSearchNameColumn, nameSearchValueColumn, nameSearchSNColumn : TableColumn
+    searchNameTextField : TextField
+
+    NameSearchItemButtonClicked()
+
 }
 
 

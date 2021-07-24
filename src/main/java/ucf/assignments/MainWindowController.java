@@ -19,6 +19,11 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
+
 
 import java.io.*;
 import java.text.DecimalFormat;
@@ -260,7 +265,7 @@ public class MainWindowController {
             else if(fileExtension.equals("html"))
             {
                 // load HTML
-
+                loadHTML(toLoad);
             }
             else if(fileExtension.equals("json")) {
                 loadJSON(toLoad);
@@ -289,8 +294,32 @@ public class MainWindowController {
         inventoryTable.refresh();
     }
     
-    private void loadHTML()
+    private void loadHTML(File toLoad)
     {
+        itemDataList.clear();
+        String HTMLString = "";
+        try {
+            HTMLString = Files.readString(Path.of(toLoad.getPath()));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try {
+            Scanner fileScanner = new Scanner(toLoad);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        Document doc  = Jsoup.parse(HTMLString);
+        Elements tds = doc.getElementsByTag("td");
+        String[] splitTag = tds.text().split(" ");
+        for(int i = 0; i < splitTag.length; i += 3)
+        {
+            InventoryItem temp = new InventoryItem(splitTag[i], splitTag[i+1], splitTag[i+2]);
+            itemDataList.add(temp);
+        }
+
+        inventoryTable.setItems(itemDataList);
+        inventoryTable.refresh();
 
     }
 
