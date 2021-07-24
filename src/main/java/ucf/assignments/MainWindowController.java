@@ -97,6 +97,7 @@ public class MainWindowController {
 
     private void addItem()
     {
+
         // initialize scenemanager
 
         sceneManager.loadAll();

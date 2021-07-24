@@ -6,6 +6,10 @@ package ucf.assignments;
 
 import org.junit.jupiter.api.Test;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class mainWindowControllerTest {
@@ -16,8 +20,25 @@ class mainWindowControllerTest {
     void stores_at_least_100_items()
     {
         // save a file with 100 items via gui
+        File saves100testFile = new File("src/test/java/ucf/assignments/test-files/saves100.tsv");
         // collect size of items array from file
+        int itemCount = 0;
+        try {
+            Scanner fileScanner = new Scanner(saves100testFile);
+
+            while(fileScanner.hasNextLine())
+            {
+                itemCount++;
+                fileScanner.nextLine();
+            }
+            System.out.println(itemCount);
+            fileScanner.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
         // assert that size equals 100
+        boolean has100minimum = (itemCount >= 100);
+        assertEquals(true,has100minimum);
     }
 
     @Test
