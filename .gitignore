@@ -1,3 +1,5 @@
 # Project exclude paths
 /.gradle/
 /build/
+/java_pid11180.hprof/
+/java_pid7308.hprof/

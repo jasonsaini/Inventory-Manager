@@ -4,10 +4,19 @@
  */
 package ucf.assignments;
 
+import org.apache.commons.lang3.StringUtils;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.Scanner;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -45,11 +54,25 @@ class mainWindowControllerTest {
     void correctly_adds_inventory_item()
     {
         // open gui and save a file with at least one item
-        // collect array from file
-
-        // if array size >= 1
-            // assert that add item works
+        File addsItemTestFile = new File("src/test/java/ucf/assignments/test-files/addsItem.tsv");
+        // collect lines from file
+        boolean works = true;
+        try {
+            Scanner fileScanner = new Scanner(addsItemTestFile);
+            String lineToParse = fileScanner.nextLine();
+            String[] arrayToParse = lineToParse.split("\t");
+            for(int i = 0; i < arrayToParse.length; i++)
+            {
+                if(arrayToParse[i].length() < 2)
+                {
+                    works = false;
+                }
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
         // assert expected (true) against actual (array size >= 1)
+        assertEquals(true,works);
     }
 
     @Test
@@ -57,64 +80,162 @@ class mainWindowControllerTest {
     {
         // populate a file with one item (via GUI or manually)
         // remove item from inventory file via gui and save it
-        // collect array from file
-        // assert that array size is 0
+        File removesItemTestFile = new File("src/test/java/ucf/assignments/test-files/removesItem.tsv");
+        boolean works = true;
+        try {
+            Scanner fileScanner = new Scanner(removesItemTestFile);
+            // if there are no lines in the file, remove item has worked
+            if(fileScanner.hasNextLine())
+            {
+               works = false;
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        assertEquals(true,works);
     }
     @Test
     void edits_value_of_existing_item()
     {
-        // populate file with one item
-        // record value of item before edit through GUI
-        // change value via gui
-        // record new value after edit
-        // assert that they are not the same
+        // populate file with one item and save
+        File editsItemValueTestFile1 = new File("src/test/java/ucf/assignments/test-files/editsItemValue.tsv");
+        String oldVal = "";
+        try {
+            Scanner fileScanner = new Scanner(editsItemValueTestFile1);
+            oldVal = fileScanner.nextLine().split("\t")[0];
+            fileScanner.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        // load and edit value of item via gui
+        // save this to a new file
+        File editsItemValueTestFile2 = new File("src/test/java/ucf/assignments/test-files/editsItemValue2.tsv");
+        String newVal = "";
+        try {
+            Scanner fileScanner = new Scanner(editsItemValueTestFile2);
+            newVal = fileScanner.nextLine().split("\t")[0];
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        // compare the value strings of each file
+        boolean expected = true, actual = !newVal.equals(oldVal);
+        assertEquals(expected,actual);
     }
+
 
     @Test
     void edits_serial_number_of_existing_item()
     {
-        // populate file with one item
-        // record serial number of item before edit through GUI
-        // change serial number via gui
-        // record new serial number after edit
-        // assert that they are not the same
+        // populate file with one item and save
+        File editsItemSNTestFile1 = new File("src/test/java/ucf/assignments/test-files/editsItemSN.tsv");
+        String oldSN = "";
+        try {
+            Scanner fileScanner = new Scanner(editsItemSNTestFile1);
+            oldSN = fileScanner.nextLine().split("\t")[1];
+            fileScanner.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        // load and edit serial number of item via gui
+        // save this to a new file
+        File editsItemSNTestFile2 = new File("src/test/java/ucf/assignments/test-files/editsItemSN2.tsv");
+        String newSN = "";
+        try {
+            Scanner fileScanner = new Scanner(editsItemSNTestFile2);
+            newSN = fileScanner.nextLine().split("\t")[1];
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        // compare the serial number strings of each file
+        boolean expected = true, actual = !newSN.equals(oldSN);
+        assertEquals(expected,actual);
     }
 
     @Test
     void edits_name_of_existing_item()
     {
-        // populate file with one item
-        // record value of item before edit through GUI
-        // change value via gui
-        // record new value after edit
-        // assert that they are not the same
+        // populate file with one item and save
+        File editsItemNameTestFile1 = new File("src/test/java/ucf/assignments/test-files/editsItemName.tsv");
+        String oldName = "";
+        try {
+            Scanner fileScanner = new Scanner(editsItemNameTestFile1);
+            oldName = fileScanner.nextLine().split("\t")[2];
+            fileScanner.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        // load and edit name of item via gui
+        // save this to a new file
+        File editsItemSNTestFile2 = new File("src/test/java/ucf/assignments/test-files/editsItemName2.tsv");
+        String newName = "";
+        try {
+            Scanner fileScanner = new Scanner(editsItemSNTestFile2);
+            newName = fileScanner.nextLine().split("\t")[2];
+            fileScanner.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        // compare the name strings of each file
+        boolean expected = true, actual = !newName.equals(oldName);
+        assertEquals(expected,actual);
     }
 
     @Test
     void saves_HTML_file()
     {
         // add a predetermined number of items to a new inventory file
-        // save file as HTML
+        int expected = 2;
+        // save file as HTML via GUI
+        File HTMLFile = new File("src/test/java/ucf/assignments/test-files/savesHTML.html");
+        String HTMLString = "";
+        try {
+            HTMLString = Files.readString(Path.of(HTMLFile.getPath()));
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         // collect number of items in HTML
+        // divide numbers of td strings by six to get number of items in HTML file
+        int actual = (StringUtils.countMatches(HTMLString,"td"))/6;
         // assert that number of items from HTML equals predetermined number
+        assertEquals(expected, actual);
     }
 
     @Test
     void saves_JSON_file()
     {
         // add a predetermined number of items to a new inventory file
-        // save file as HTML
-        // collect number of items in HTML
+        int expected = 2;
+        // save file as JSON
+        JSONObject curObject = parseJSONFile("src/test/java/ucf/assignments/test-files/savesJSON.json");
+        JSONArray inventoryList = (JSONArray) curObject.get("inventory");
+        // collect number of items in JSON
+        int actual = inventoryList.size();
         // assert that number of items from HTML equals predetermined number
+        assertEquals(expected,actual);
     }
 
     @Test
     void saves_TSV_file()
     {
         // add a predetermined number of items to a new inventory file
-        // save file as HTML
-        // collect number of items in HTML
-        // assert that number of items from HTML equals predetermined number
+        int expected = 2;
+        int actual = 0;
+        // save file as .tsv
+        File savesTSVFileTest = new File("src/test/java/ucf/assignments/test-files/savesTSV.tsv");
+        try {
+            Scanner fileScanner = new Scanner(savesTSVFileTest);
+            // collect number of items in TSV
+            while(fileScanner.hasNextLine())
+            {
+                actual++;
+                fileScanner.nextLine();
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        // assert that number of items from TSV equals predetermined number
+        assertEquals(expected,actual);
     }
 
     @Test
@@ -142,5 +263,23 @@ class mainWindowControllerTest {
         // save the contents to a separate file
         // convert both to strings
         // assert that the file strings are equal
+    }
+
+
+    public JSONObject parseJSONFile(String dir)
+    {   // instantiate file directory and object
+        File testFile = new File(dir);
+        Object obj = new Object();
+        // try parsing json file
+        try {
+            obj = new JSONParser().parse(new FileReader(testFile));
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        // return JSON Object
+        JSONObject object = (JSONObject)obj;
+        return object;
     }
 }

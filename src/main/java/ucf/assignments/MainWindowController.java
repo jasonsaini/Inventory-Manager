@@ -21,7 +21,6 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 
@@ -31,6 +30,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Iterator;
 import java.util.Scanner;
+import org.apache.commons.lang3.StringUtils;
 
 public class MainWindowController {
 
@@ -244,6 +244,7 @@ public class MainWindowController {
 
     private void loadFile()
     {
+        sceneManager.loadAll();
         nameColumn.setCellValueFactory(new PropertyValueFactory<InventoryItem,String>("name"));
         valueColumn.setCellValueFactory(new PropertyValueFactory<InventoryItem,String>("dollarVal"));
         serialNumberColumn.setCellValueFactory(new PropertyValueFactory<InventoryItem,String>("serialNum"));
