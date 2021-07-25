@@ -242,28 +242,67 @@ class mainWindowControllerTest {
     void loads_HTML_file()
     {
         // load a pre-made HTML file
-        // save the contents to a separate file
+        File preMadeHTML = new File("src/test/java/ucf/assignments/test-files/preMadeHTML.html");
+        // save the contents to a separate file via GUI
+        File savedHTML = new File("src/test/java/ucf/assignments/test-files/savesHTML.html");
         // convert both to strings
+        String expected = "", actual = " ";
+        try {
+            expected = Files.readString(Path.of(preMadeHTML.getPath()));
+            actual =  Files.readString(Path.of(savedHTML.getPath()));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         // assert that the file strings are equal
+        assertEquals(expected,actual);
     }
 
     @Test
     void loads_JSON_file()
     {
         // load a pre-made JSON file
+        File preMadeJSON = new File("src/test/java/ucf/assignments/test-files/preMadeJSON.json");
         // save the contents to a separate file
+        File savedJSON = new File("src/test/java/ucf/assignments/test-files/loadsJSON.json");
         // convert both to strings
+        String expected ="", actual = " ";
+        try
+        {
+            expected = Files.readString(Path.of(preMadeJSON.getPath()));
+            actual = Files.readString(Path.of(savedJSON.getPath()));
+        }
+        catch(IOException e)
+        {
+            e.printStackTrace();
+        }
+
         // assert that the file strings are equal
+        assertEquals(expected,actual);
     }
 
     @Test
     void loads_TSV_file()
     {
         // load a pre-made TSV file
+        File preMadeTSV = new File("src/test/java/ucf/assignments/test-files/preMadeTSV.tsv");
         // save the contents to a separate file
+        File savedTSV = new File("src/test/java/ucf/assignments/test-files/loadsTSV.tsv");
         // convert both to strings
-        // assert that the file strings are equal
+        String expected = "", actual = " ";
+        // assert that the file strings arde equal
+        try
+        {
+
+            expected = Files.readString(Path.of(preMadeTSV.getPath()));
+            actual = Files.readString(Path.of(savedTSV.getPath()));
+        }
+        catch (IOException e)
+        {
+
+        }
+        assertEquals(expected,actual);
     }
+
 
 
     public JSONObject parseJSONFile(String dir)
