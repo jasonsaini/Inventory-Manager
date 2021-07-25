@@ -95,9 +95,31 @@ public class MainWindowController {
     }
 
 
+    public int compareTwoValuesProperly(String val1, String val2)
+    {
+        val1 = val1.replace("$","");
+        val2 = val2.replace("$", "");
+        double actualVal1 = Double.parseDouble(val1);
+        double actualVal2 = Double.parseDouble(val2);
+
+        if(actualVal1 > actualVal2)
+        {
+            return 1;
+        }
+        else if(actualVal1 < actualVal2)
+        {
+            return -1;
+        }
+        else
+        {
+            return 0;
+        }
+
+    }
+
     private void addItem()
     {
-
+        valueColumn.setComparator((value1, value2) -> compareTwoValuesProperly(value1,value2));
         // initialize scenemanager
 
         sceneManager.loadAll();
@@ -244,6 +266,8 @@ public class MainWindowController {
 
     private void loadFile()
     {
+        valueColumn.setComparator((value1, value2) -> compareTwoValuesProperly(value1,value2));
+
         sceneManager.loadAll();
         nameColumn.setCellValueFactory(new PropertyValueFactory<InventoryItem,String>("name"));
         valueColumn.setCellValueFactory(new PropertyValueFactory<InventoryItem,String>("dollarVal"));
